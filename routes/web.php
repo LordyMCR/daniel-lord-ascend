@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\BookCopyController;
 use App\Http\Controllers\BorrowRequestController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/overdue-borrows', [AdminUserController::class, 'showOverdueBorrows'])->name('overdue');
+        Route::post('/overdue-borrows/{borrow}/send-overdue-reminder', [AdminUserController::class, 'sendOverdueReminder'])->name('send_reminder');
+        Route::post('/overdue-borrows/send-bulk-overdue-reminders', [AdminUserController::class, 'sendBulkOverdueReminders'])->name('send_bulk_reminders');
+    });
 });
+
 
 require __DIR__.'/auth.php';

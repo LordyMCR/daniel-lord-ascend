@@ -1,14 +1,16 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import Toast from '@/Components/Toast.vue';
 
 const showingNavigationDropdown = ref(false);
+const page = usePage();
+const isAdmin = computed(() => page.props.auth.user?.user_type === 1);
 </script>
 
 <template>
@@ -33,6 +35,9 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('book-copies.index')" :active="route().current('book-copies.index')">
                                     Dashboard
+                                </NavLink>
+                                <NavLink v-if="isAdmin" :href="route('admin.overdue')" :active="route().current('admin.overdue')">
+                                    Overdue Users
                                 </NavLink>
                             </div>
                         </div>
@@ -116,6 +121,9 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('book-copies.index')" :active="route().current('book-copies.index')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink v-if="isAdmin" :href="route('admin.overdue')" :active="route().current('admin.overdue')">
+                            Overdue Users
                         </ResponsiveNavLink>
                     </div>
 

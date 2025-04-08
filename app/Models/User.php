@@ -25,6 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'user_type',
     ];
 
     protected $hidden = [
@@ -34,6 +36,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'user_type' => UserType::class,
     ];
 
     public function libraries(): BelongsToMany
