@@ -17,6 +17,9 @@
                                 <span>Request</span>
                             </DropdownLink>
                         </template>
+                        <template #footer>
+                            <Pagination :pagination="book_copies.meta" />
+                        </template>
                     </ResponsiveTable>
                 </div>
             </div>
@@ -27,6 +30,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ResponsiveTable from "@/Components/ResponsiveTable.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
+import Pagination from "@/Components/Pagination.vue";
 </script>
 
 <script>
