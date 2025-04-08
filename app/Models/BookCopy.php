@@ -16,6 +16,13 @@ class BookCopy extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'barcode',
+        'library_id',
+        'book_id',
+        'status',
+    ];
+
     public function library(): BelongsTo
     {
         return $this->belongsTo(Library::class);
