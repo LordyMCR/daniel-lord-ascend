@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/borrow', [BorrowAPIController::class, 'store']);
-Route::post('/return', [ReturnAPIController::class, 'store']);
+Route::post('/borrow', [BorrowAPIController::class, 'store'])->name('borrows.store');
+Route::post('/return', [ReturnAPIController::class, 'store'])->name('returns.store');
 
